@@ -170,7 +170,77 @@
             font-size: 15px;
         }
 
-        /* COMPONENTES */
+        /* COMPONENTES TELA BOAS-VINDAS E LOGIN */
+        .welcome-bg {
+            background: linear-gradient(180deg, #05132d 0%, #030a19 100%);
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+        }
+
+        .brand-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 0.95;
+            color: #ffffff;
+            letter-spacing: -1px;
+            margin-top: 120px;
+        }
+
+        .brand-title span {
+            color: var(--accent-yellow);
+            font-size: 32px;
+            font-weight: 700;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .cloud-icon {
+            position: absolute;
+            color: rgba(255,255,255,0.85);
+            filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
+        }
+
+        .divider-or {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            margin: 20px 0;
+        }
+
+        .divider-or::before, .divider-or::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .divider-or span {
+            padding: 0 12px;
+        }
+
+        .btn-social {
+            width: 100%;
+            padding: 12px;
+            background-color: #e2e8f0;
+            border: none;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #1e293b;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        /* COMPONENTES GERAIS */
         .onboarding-title {
             font-size: 32px;
             font-weight: 800;
@@ -414,8 +484,74 @@
 
 <div id="app">
 
-    <!-- 1. CADASTRO -->
-    <section id="screen-register" class="screen">
+    <!-- 1. TELA INICIAL / WELCOME -->
+    <section id="screen-welcome" class="screen">
+        <div class="welcome-bg">
+            <!-- Nuvem com raio superior esquerda -->
+            <div class="cloud-icon" style="top: 80px; left: -20px; font-size: 70px;">
+                <i class="fa-solid fa-cloud"></i>
+                <i class="fa-solid fa-bolt" style="color: var(--accent-yellow); position: absolute; bottom: -15px; left: 15px; font-size: 35px;"></i>
+            </div>
+
+            <!-- Nuvem com raio inferior direita -->
+            <div class="cloud-icon" style="top: 480px; right: -20px; font-size: 80px;">
+                <i class="fa-solid fa-cloud"></i>
+                <i class="fa-solid fa-bolt" style="color: var(--accent-yellow); position: absolute; bottom: -15px; left: 20px; font-size: 40px;"></i>
+            </div>
+
+            <div>
+                <h1 class="brand-title">SE LIGA<span>Na chuva</span></h1>
+            </div>
+
+            <div style="margin-bottom: 20px; z-index: 10;">
+                <h2 style="font-size: 22px; font-weight: 500; margin-bottom: 6px;">Bem vindo !</h2>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 24px;">Informação em tempo real para sua segurança</p>
+                <button class="btn-yellow" onclick="navigateTo('screen-login')">Entrar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. TELA DE LOGIN -->
+    <section id="screen-login" class="screen d-none">
+        <div class="welcome-bg" style="justify-content: space-between;">
+            <h1 style="text-align: center; font-size: 36px; font-weight: 700; margin-top: 60px;">Login</h1>
+
+            <div style="background-color: rgba(5, 16, 38, 0.85); border-radius: 24px 24px 0 0; padding: 24px 20px; margin: 0 -24px -40px -24px;">
+                <div class="input-field">
+                    <label>Email</label>
+                    <input type="email" value="ana123@gmail.com" id="login-email">
+                </div>
+
+                <div class="input-field" style="margin-bottom: 20px;">
+                    <label>Senha</label>
+                    <input type="password" value="******">
+                </div>
+
+                <div class="divider-or">
+                    <span>OU</span>
+                </div>
+
+                <button class="btn-social" onclick="navigateTo('screen-location')">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google">
+                    Fazer login com o Google
+                </button>
+
+                <button class="btn-social" onclick="navigateTo('screen-location')">
+                    <i class="fa-brands fa-facebook" style="color: #1877f2; font-size: 18px;"></i>
+                    Fazer login com o Facebook
+                </button>
+
+                <button class="btn-yellow" style="margin-top: 20px;" onclick="navigateTo('screen-home', getNavBtn(0))">Continuar</button>
+
+                <p style="font-size: 12px; color: var(--text-white); text-align: center; margin-top: 16px; cursor: pointer;" onclick="navigateTo('screen-register')">
+                    Não tem uma conta? <span style="font-weight: 700;">Cadastre-se</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CADASTRO -->
+    <section id="screen-register" class="screen d-none">
         <div class="screen-content" style="justify-content: flex-end; height: 100%; padding-bottom: 40px;">
             <h1 class="onboarding-title" style="margin-bottom: 20px;">Cadastro</h1>
             
@@ -437,13 +573,13 @@
             </div>
 
             <button class="btn-yellow" style="margin-top: 16px;" onclick="navigateTo('screen-location')">Continuar</button>
-            <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; cursor: pointer;" onclick="navigateTo('screen-home', getNavBtn(0))">
+            <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; cursor: pointer;" onclick="navigateTo('screen-login')">
                 Já tem uma conta? Faça o login
             </p>
         </div>
     </section>
 
-    <!-- 2. LOCALIZAÇÃO -->
+    <!-- 4. LOCALIZAÇÃO -->
     <section id="screen-location" class="screen d-none">
         <div class="screen-content">
             <div class="step-indicator" style="margin-top: 20px;">
@@ -478,7 +614,7 @@
         </div>
     </section>
 
-    <!-- 3. INÍCIO / HOME -->
+    <!-- 5. INÍCIO / HOME -->
     <section id="screen-home" class="screen d-none">
         <div class="home-user-bar">
             <div>
@@ -541,7 +677,7 @@
         </div>
     </section>
 
-    <!-- 4. PREVISÃO DO TEMPO -->
+    <!-- 6. PREVISÃO DO TEMPO -->
     <section id="screen-weather" class="screen d-none">
         <div class="top-header">
             <h2>Previsão do Tempo</h2>
@@ -593,7 +729,7 @@
         </div>
     </section>
 
-    <!-- 5. ÁREAS DE RISCO (MAPA INTERATIVO) -->
+    <!-- 7. ÁREAS DE RISCO (MAPA INTERATIVO) -->
     <section id="screen-map" class="screen d-none">
         <div class="top-header">
             <h2>Áreas de risco</h2>
@@ -607,7 +743,7 @@
         </div>
     </section>
 
-    <!-- 6. ALERTAS -->
+    <!-- 8. ALERTAS -->
     <section id="screen-alerts" class="screen d-none">
         <div class="top-header">
             <h2>Alertas</h2>
@@ -656,7 +792,7 @@
         </div>
     </section>
 
-    <!-- 7. REPORTAR ALAGAMENTO -->
+    <!-- 9. REPORTAR ALAGAMENTO -->
     <section id="screen-report" class="screen d-none">
         <div class="top-header">
             <button class="back-btn" onclick="navigateTo('screen-home', getNavBtn(0))"><i class="fa-solid fa-arrow-left"></i></button>
@@ -696,7 +832,7 @@
         </div>
     </section>
 
-    <!-- 8. EMERGÊNCIA -->
+    <!-- 10. EMERGÊNCIA -->
     <section id="screen-emergency" class="screen d-none">
         <div class="top-header">
             <button class="back-btn" onclick="navigateTo('screen-home', getNavBtn(0))"><i class="fa-solid fa-arrow-left"></i></button>
@@ -742,7 +878,7 @@
         </div>
     </section>
 
-    <!-- 9. CONFIGURAÇÕES -->
+    <!-- 11. CONFIGURAÇÕES -->
     <section id="screen-settings" class="screen d-none">
         <div class="top-header">
             <button class="back-btn" onclick="navigateTo('screen-home', getNavBtn(0))"><i class="fa-solid fa-arrow-left"></i></button>
@@ -763,12 +899,12 @@
             <div class="settings-list">
                 <div class="settings-item" onclick="alert('Gerenciar Contas')"><span><i class="fa-solid fa-user-gear" style="width: 24px;"></i> Gerenciar Contas</span> <i class="fa-solid fa-chevron-right"></i></div>
                 <div class="settings-item" onclick="navigateTo('screen-report')"><span><i class="fa-solid fa-triangle-exclamation" style="width: 24px;"></i> Reportar</span> <i class="fa-solid fa-chevron-right"></i></div>
-                <div class="settings-item" onclick="navigateTo('screen-register')" style="cursor: pointer;"><span style="color: #ff4d4d;"><i class="fa-solid fa-right-from-bracket" style="width: 24px;"></i> Sair</span> <i class="fa-solid fa-chevron-right"></i></div>
+                <div class="settings-item" onclick="navigateTo('screen-welcome')" style="cursor: pointer;"><span style="color: #ff4d4d;"><i class="fa-solid fa-right-from-bracket" style="width: 24px;"></i> Sair</span> <i class="fa-solid fa-chevron-right"></i></div>
             </div>
         </div>
     </section>
 
-    <!-- 10. PERFIL -->
+    <!-- 12. PERFIL -->
     <section id="screen-profile" class="screen d-none">
         <div class="top-header">
             <h2>Perfil</h2>
@@ -855,7 +991,7 @@
             navElement.classList.add('active');
         }
 
-        // Caso a tela aberta seja a do mapa, inicializa ou reajusta a renderização
+        // Ajusta a renderização do mapa caso a tela atual seja o mapa
         if (screenId === 'screen-map') {
             setTimeout(() => {
                 initMap();
@@ -913,7 +1049,6 @@
     function initMap() {
         if (mapInitialized) return;
 
-        // Recife, PE (Coordenadas padrão)
         const lat = -8.0476;
         const lng = -34.8770;
 
@@ -923,7 +1058,6 @@
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        // Pontos de alagamento/risco
         const points = [
             { lat: -8.0631, lng: -34.8711, title: 'Alagamento Alto', desc: 'Rua Imperial - Água na altura dos pneus', color: '#900C1C' },
             { lat: -8.0500, lng: -34.8800, title: 'Risco Médio', desc: 'Av. Agamenon Magalhães - Trânsito lento', color: '#FF7000' },
